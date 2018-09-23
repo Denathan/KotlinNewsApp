@@ -28,15 +28,6 @@
             android:textSize="@dimen/sp14" />
 
         <TextView
-            android:id="@+id/author_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/author_sample"
-            android:textColor="@color/thirdText"
-            android:textSize="@dimen/sp10" />
-
-        <TextView
             android:id="@+id/publication_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
