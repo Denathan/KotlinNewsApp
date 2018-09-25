@@ -1,6 +1,6 @@
-package com.denath.kotlinnewsapp
+package com.denath.kotlinnewsapp.Data
 
-data class News (
+data class Results(
         val id: String,
         val type: String,
         val sectionId: String,

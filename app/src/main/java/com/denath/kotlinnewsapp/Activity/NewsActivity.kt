@@ -1,9 +1,11 @@
-package com.denath.kotlinnewsapp
+package com.denath.kotlinnewsapp.Activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.denath.kotlinnewsapp.Adapter.NewsAdapter
+import com.denath.kotlinnewsapp.Data.Response
+import com.denath.kotlinnewsapp.R
 import com.denath.kotlinnewsapp.Retrofit.RequestAPI
 import com.denath.kotlinnewsapp.Retrofit.RetrofitClient
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,14 +32,14 @@ class NewsActivity : AppCompatActivity() {
     }
 
     private fun loadUrlData() {
-        compositeDisposable.add(jsonApi.news
+        compositeDisposable.add(jsonApi.response
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe{news -> displayData(news)})
+                .subscribe{response -> displayData(response)})
     }
 
-    private fun displayData(news: List<News>) {
-        val adapter = NewsAdapter(news, this)
+    private fun displayData(response: Response) {
+        val adapter = NewsAdapter(response.response.results, this)
         foundNewsList.adapter = adapter
     }
 }
