@@ -1,10 +1,10 @@
-package com.denath.kotlinnewsapp.Adapter
+package com.denath.kotlinnewsapp.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.denath.kotlinnewsapp.Data.Results
+import com.denath.kotlinnewsapp.models.Results
 import com.denath.kotlinnewsapp.R
 
 class NewsAdapter(var newsList: List<Results>, var context: Context) : RecyclerView.Adapter<NewsViewHolder>() {
@@ -24,7 +24,4 @@ class NewsAdapter(var newsList: List<Results>, var context: Context) : RecyclerV
         return NewsViewHolder(LayoutInflater.from(context)
                 .inflate(R.layout.list_news, parent, false))
     }
-
 }
-
-

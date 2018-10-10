@@ -9,4 +9,5 @@
     <string name="section_sample">Section sample</string>
     <string name="author_sample">Author sample</string>
     <string name="date_sample">Date sample</string>
+    <string name="fetch_news">Fetch news</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.denath.kotlinnewsapp.Data
+package com.denath.kotlinnewsapp.models
 
 data class News(
         val status: String,

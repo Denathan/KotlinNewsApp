@@ -1,4 +1,4 @@
-package com.denath.kotlinnewsapp.Data
+package com.denath.kotlinnewsapp.models
 
 data class Results(
         val id: String,

@@ -1,6 +1,6 @@
-package com.denath.kotlinnewsapp.Retrofit
+package com.denath.kotlinnewsapp.retrofit
 
-import com.denath.kotlinnewsapp.Data.Response
+import com.denath.kotlinnewsapp.models.Response
 import io.reactivex.Observable
 import retrofit2.http.GET
 

@@ -1,4 +1,4 @@
-package com.denath.kotlinnewsapp.Retrofit
+package com.denath.kotlinnewsapp.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
