@@ -35,13 +35,11 @@ class NewsActivity : AppCompatActivity(), MainView {
 
         newsInteractor = NewsInteractor(jsonApi)
         newsPresenter = NewsPresenter(newsInteractor, this)
-
-
     }
 
     override fun onStart() {
         buttonClickSubject = PublishSubject.create<Boolean>()
-        newsPresenter.bind()
+//        newsPresenter.bind()
 
         if (init) {
             fetchBtn.setOnClickListener {
@@ -74,7 +72,11 @@ class NewsActivity : AppCompatActivity(), MainView {
 //    }
 
     override fun buttonClick(): Observable<Boolean> = buttonClickSubject.doOnNext {
-        Log.d("cokolwiek", "inside")
+        Log.d("xd", "inside")
+    }
+
+    override fun buttonIntent(): Observable<Any> {
+        return RxView.clicks(fetchBtn).doOnNext { Log.d("xd", "onNext") }
     }
 
     private fun initRecyclerView() {
