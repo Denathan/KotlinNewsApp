@@ -1,7 +1,6 @@
 package com.denath.kotlinnewsapp.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -10,20 +9,21 @@ import com.denath.kotlinnewsapp.adapter.NewsAdapter
 import com.denath.kotlinnewsapp.models.Results
 import com.denath.kotlinnewsapp.retrofit.RequestAPI
 import com.denath.kotlinnewsapp.retrofit.RetrofitClient
+import com.hannesdorfmann.mosby3.mvi.MviActivity
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_news.*
 
 
-class NewsActivity : AppCompatActivity(), MainView {
+class NewsActivity : MviActivity<MainView, NewsPresenter>(), MainView {
+    override fun createPresenter(): NewsPresenter {
+        return NewsPresenter(newsInteractor, this)
+    }
 
-    private lateinit var buttonClickSubject: PublishSubject<Boolean>
     private lateinit var jsonApi: RequestAPI
-    private var init = true
 
     lateinit var newsInteractor: NewsInteractor
-    lateinit var newsPresenter: NewsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,27 +34,6 @@ class NewsActivity : AppCompatActivity(), MainView {
         jsonApi = retrofit.create(RequestAPI::class.java)
 
         newsInteractor = NewsInteractor(jsonApi)
-        newsPresenter = NewsPresenter(newsInteractor, this)
-    }
-
-    override fun onStart() {
-        buttonClickSubject = PublishSubject.create<Boolean>()
-//        newsPresenter.bind()
-
-        if (init) {
-            fetchBtn.setOnClickListener {
-                buttonClickSubject.onNext(true)
-                Log.d("button", "btn click")
-            }
-            init = false
-        }
-
-        super.onStart()
-    }
-
-    override fun onStop() {
-        newsPresenter.unbind()
-        super.onStop()
     }
 
     override fun render(newsViewState: NewsViewState) {
@@ -66,17 +45,8 @@ class NewsActivity : AppCompatActivity(), MainView {
         }
     }
 
-//    override fun buttonClick(): Observable<Any> {
-//        return RxView.clicks(fetchBtn)
-//                .doOnNext { Log.d("elo", "onNext") }
-//    }
-
-    override fun buttonClick(): Observable<Boolean> = buttonClickSubject.doOnNext {
-        Log.d("xd", "inside")
-    }
-
     override fun buttonIntent(): Observable<Any> {
-        return RxView.clicks(fetchBtn).doOnNext { Log.d("xd", "onNext") }
+        return RxView.clicks(fetchBtn as View).doOnNext { Log.d("xd", "onNext") }
     }
 
     private fun initRecyclerView() {
