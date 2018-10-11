@@ -5,18 +5,17 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class NewsPresenter(private val newsInteractor: NewsInteractor, private val mainView: MainView) : MviBasePresenter<MainView, NewsViewState>() {
+class NewsPresenter(private val newsInteractor: NewsInteractor) : MviBasePresenter<MainView, NewsViewState>() {
 
     override fun bindIntents() {
 
         val click: Observable<NewsViewState> =
-                intent { mainView.buttonIntent() }
+                intent { it.buttonIntent() }
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(AndroidSchedulers.mainThread())
                         .flatMap { newsInteractor.getNews().subscribeOn(Schedulers.io()) }
                         .startWith(PartialNewsViewState.LoadingState)
                         .scan(NewsViewState(), this::reduce)
-                        .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread())
 
         subscribeViewState(click, MainView::render)

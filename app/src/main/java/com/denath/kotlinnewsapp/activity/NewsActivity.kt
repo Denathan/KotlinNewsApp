@@ -12,18 +12,17 @@ import com.denath.kotlinnewsapp.retrofit.RetrofitClient
 import com.hannesdorfmann.mosby3.mvi.MviActivity
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_news.*
 
 
 class NewsActivity : MviActivity<MainView, NewsPresenter>(), MainView {
     override fun createPresenter(): NewsPresenter {
-        return NewsPresenter(newsInteractor, this)
+        return NewsPresenter(newsInteractorImpl)
     }
 
     private lateinit var jsonApi: RequestAPI
 
-    lateinit var newsInteractor: NewsInteractor
+    lateinit var newsInteractorImpl: NewsInteractorImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +32,7 @@ class NewsActivity : MviActivity<MainView, NewsPresenter>(), MainView {
         val retrofit = RetrofitClient.instance
         jsonApi = retrofit.create(RequestAPI::class.java)
 
-        newsInteractor = NewsInteractor(jsonApi)
+        newsInteractorImpl = NewsInteractorImpl(jsonApi)
     }
 
     override fun render(newsViewState: NewsViewState) {
