@@ -1,6 +1,5 @@
 package com.denath.kotlinnewsapp.activity
 
-import android.util.Log
 import com.hannesdorfmann.mosby3.mvi.MviBasePresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,16 +10,11 @@ class NewsPresenter(private val newsInteractor: NewsInteractor, private val main
     override fun bindIntents() {
 
         val click: Observable<NewsViewState> =
-                intent {
-                    mainView.buttonIntent()
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(AndroidSchedulers.mainThread())
-                            .flatMap {
-                                newsInteractor.getNews().subscribeOn(Schedulers.io())
-                            }
-                            .startWith(PartialNewsViewState.LoadingState)
-                            .doOnNext { Log.d("bind", "We are inside") }
-                }
+                intent { mainView.buttonIntent() }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(AndroidSchedulers.mainThread())
+                        .flatMap { newsInteractor.getNews().subscribeOn(Schedulers.io()) }
+                        .startWith(PartialNewsViewState.LoadingState)
                         .scan(NewsViewState(), this::reduce)
                         .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread())

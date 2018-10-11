@@ -46,7 +46,7 @@ class NewsActivity : MviActivity<MainView, NewsPresenter>(), MainView {
     }
 
     override fun buttonIntent(): Observable<Any> {
-        return RxView.clicks(fetchBtn as View).doOnNext { Log.d("xd", "onNext") }
+        return RxView.clicks(fetchBtn).doOnNext { Log.d("xd", "onNext") }
     }
 
     private fun initRecyclerView() {
