@@ -5,6 +5,7 @@ import com.denath.kotlinnewsapp.activity.NewsPresenter
 import com.denath.kotlinnewsapp.activity.NewsViewState
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import junit.framework.Assert
 
 class MainViewRobot(newsPresenter: NewsPresenter) {
 
@@ -27,5 +28,9 @@ class MainViewRobot(newsPresenter: NewsPresenter) {
 
     fun performButtonClick() {
         buttonSubject.onNext(true)
+    }
+
+    fun assertViewStates(expectedViewStates: List<NewsViewState>) {
+        Assert.assertEquals(listOfStates, expectedViewStates)
     }
 }

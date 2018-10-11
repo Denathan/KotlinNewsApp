@@ -2,6 +2,7 @@ package com.denath.kotlinnewsapp
 
 import com.denath.kotlinnewsapp.activity.NewsInteractor
 import com.denath.kotlinnewsapp.activity.NewsPresenter
+import com.denath.kotlinnewsapp.activity.NewsViewState
 import com.denath.kotlinnewsapp.activity.PartialNewsViewState
 import com.denath.kotlinnewsapp.models.Results
 import com.nhaarman.mockitokotlin2.doReturn
@@ -31,5 +32,7 @@ class MainPresenterTest {
         val viewRobot = MainViewRobot(presenter)
 
         viewRobot.performButtonClick()
+
+        viewRobot.assertViewStates(listOf(NewsViewState(), NewsViewState(false, null, testResults)))
     }
 }
