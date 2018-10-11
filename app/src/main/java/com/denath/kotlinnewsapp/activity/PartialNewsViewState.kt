@@ -14,7 +14,7 @@ sealed class PartialNewsViewState {
         override fun reduce(previousState: NewsViewState): NewsViewState = NewsViewState(error = throwable)
     }
 
-    class NewsListFetchedState(private val resultsList: List<Results>) : PartialNewsViewState() {
+    data class NewsListFetchedState(private val resultsList: List<Results>) : PartialNewsViewState() {
         override fun reduce(previousState: NewsViewState): NewsViewState = NewsViewState(resultsList = resultsList, loading = false)
     }
 }

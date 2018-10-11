@@ -22,6 +22,7 @@ class MainPresenterTest {
     @Test
     fun WhenUserClicksButtonThenShowProperState() {
         val testResults = listOf(Results())
+
         val interactor: NewsInteractor = mock {
             on { it.getNews() } doReturn Observable.just(PartialNewsViewState.NewsListFetchedState(testResults))
                     .cast(PartialNewsViewState::class.java)
