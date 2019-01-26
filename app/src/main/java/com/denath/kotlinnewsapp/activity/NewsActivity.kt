@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.denath.kotlinnewsapp.R
+import com.denath.kotlinnewsapp.R.id.fetchBtn
+import com.denath.kotlinnewsapp.R.id.foundNewsList
 import com.denath.kotlinnewsapp.adapter.NewsAdapter
 import com.denath.kotlinnewsapp.models.Results
 import com.denath.kotlinnewsapp.retrofit.RequestAPI
